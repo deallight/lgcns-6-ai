@@ -1,0 +1,22 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: ai
+
+  # MariaDB 연결 정보는 소스에 비밀번호를 남기지 않도록 환경변수로 받습니다.
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/miniproject1}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# OpenAI 키와 모델은 .env를 실행 환경변수로 불러와 사용합니다.
+openai:
+  api-key: ${OPEN_AI_KEY:}
+  model: ${OPEN_AI_MODEL:gpt-4o-mini}

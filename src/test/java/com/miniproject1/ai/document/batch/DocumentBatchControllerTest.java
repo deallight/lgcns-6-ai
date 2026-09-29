@@ -25,14 +25,14 @@ class DocumentBatchControllerTest {
     @Test
     void startsAllProgramBatchByDefault() throws Exception {
         DocumentBatchStatusResponse response =
-                new DocumentBatchStatusResponse("RUNNING", 1554, 1554, 0, 0, 0, null);
-        when(documentBatchService.start(1554)).thenReturn(response);
+                new DocumentBatchStatusResponse("RUNNING", 1500, 1500, 0, 0, 0, null);
+        when(documentBatchService.start(1500)).thenReturn(response);
 
         mockMvc.perform(post("/api/documents/batch/start"))
                 .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$.status").value("RUNNING"))
-                .andExpect(jsonPath("$.limit").value(1554))
-                .andExpect(jsonPath("$.total").value(1554));
+                .andExpect(jsonPath("$.limit").value(1500))
+                .andExpect(jsonPath("$.total").value(1500));
     }
 
     @Test

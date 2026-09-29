@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 공고문 일괄 파싱 및 요약 API입니다.
  */
 @Validated
-@Tag(name = "Document Batch", description = "공고문 최대 1554건 일괄 처리 API")
+@Tag(name = "Document Batch", description = "공고문 최대 1500건 일괄 처리 API")
 @RestController
 @RequestMapping("/api/documents/batch")
 public class DocumentBatchController {
@@ -28,12 +28,12 @@ public class DocumentBatchController {
         this.documentBatchService = documentBatchService;
     }
 
-    /** 처리되지 않은 공고를 최대 1554건까지 백그라운드에서 처리합니다. */
-    @Operation(summary = "공고문 최대 1554건 일괄 처리 시작")
+    /** 처리되지 않은 공고를 최대 1500건까지 백그라운드에서 처리합니다. */
+    @Operation(summary = "공고문 최대 1500건 일괄 처리 시작")
     @PostMapping("/start")
     public ResponseEntity<DocumentBatchStatusResponse> start(
-            @Parameter(description = "처리할 공고 수", example = "1554")
-            @RequestParam(defaultValue = "1554") @Min(1) @Max(1554) int limit) {
+            @Parameter(description = "처리할 공고 수", example = "1500")
+            @RequestParam(defaultValue = "1500") @Min(1) @Max(1500) int limit) {
         return ResponseEntity.accepted().body(documentBatchService.start(limit));
     }
 

@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class DocumentBatchService {
 
-    private static final int MAX_BATCH_LIMIT = 1554;
+    private static final int MAX_BATCH_LIMIT = 1500;
 
     private final DocumentBatchRepository documentBatchRepository;
     private final ProgramDocumentRepository programDocumentRepository;
@@ -48,7 +48,7 @@ public class DocumentBatchService {
         this.taskExecutor = taskExecutor;
     }
 
-    /** 최대 1554건을 조회한 뒤 백그라운드에서 한 건씩 처리합니다. */
+    /** 최대 1500건을 조회한 뒤 백그라운드에서 한 건씩 처리합니다. */
     public DocumentBatchStatusResponse start(int limit) {
         validateLimit(limit);
         if (!running.compareAndSet(false, true)) {
@@ -125,12 +125,12 @@ public class DocumentBatchService {
         }
     }
 
-    /** 현재 DB의 전체 공고 수인 1554건을 넘지 못하도록 제한합니다. */
+    /** 한 번에 처리할 수 있는 최대 1500건을 넘지 못하도록 제한합니다. */
     private void validateLimit(int limit) {
         if (limit < 1 || limit > MAX_BATCH_LIMIT) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "limit은 1 이상 1554 이하만 사용할 수 있습니다.");
+                    "limit은 1 이상 1500 이하만 사용할 수 있습니다.");
         }
     }
 }
